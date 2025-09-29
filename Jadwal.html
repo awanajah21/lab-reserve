@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Stitch Design</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Inter"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet" />
+  </head>
+  <body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="flex min-h-screen w-full flex-col">
+      <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-gray-700/50 px-10 py-3">
+        <div class="flex items-center gap-8">
+          <div class="flex items-center gap-3 text-gray-900 dark:text-white">
+            <div class="size-8 text-primary">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  clip-rule="evenodd"
+                  d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
+              LabReserve
+            </h2>
+          </div>
+          <nav class="hidden md:flex items-center gap-6">
+            <a
+              class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+              href="home.html"
+              >Home</a
+            >
+            <a
+              class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+              href="RoomList.html"
+              >Availability</a
+            >
+            <a
+              class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+              href="Jadwal.html"
+              >Room Usage</a
+            >
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="relative" id="profile-dropdown-container">
+            <button
+              id="profile-button"
+              class="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-800 dark:text-gray-200 transition-shadow duration-150 focus:outline-none focus:ring-2 focus:ring-primary"
+              type="button">
+              <img
+                id="profile-img"
+                class="w-full h-full object-cover rounded-full hidden"
+                alt="Foto Profil" />
+              <span id="profile-initials" class="font-semibold text-lg">U</span>
+            </button>
+
+            <div
+              id="profile-menu"
+              class="absolute right-0 mt-2 w-48 rounded-lg shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 z-50 hidden origin-top-right transform scale-95 opacity-0 transition-all duration-200"
+              role="menu"
+              tabindex="-1">
+              <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <p
+                  class="text-sm font-medium text-gray-900 dark:text-white truncate"
+                  id="dropdown-username"></p>
+                <p
+                  class="text-xs text-gray-500 dark:text-gray-400"
+                  id="dropdown-role"></p>
+              </div>
+              <div class="py-1" role="none">
+                <button
+                  id="change-photo-btn"
+                  class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  role="menuitem"
+                  tabindex="-1">
+                  Ubah Foto Profil
+                </button>
+                <button
+                  id="logout-btn"
+                  class="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700"
+                  role="menuitem"
+                  tabindex="-1">
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="flex-1 px-4 py-8 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl">
+          <div class="mb-6">
+            <h1
+              class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Room Usage Schedule
+            </h1>
+          </div>
+          <div class="border-b border-gray-200 dark:border-gray-700">
+            <nav aria-label="Tabs" class="-mb-px flex space-x-8">
+              <a
+                aria-current="page"
+                class="border-primary text-primary whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium"
+                href="#">
+                Table View
+              </a>
+              <a
+                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200 whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium"
+                href="CalenderView.html">
+                Calendar View
+              </a>
+            </nav>
+          </div>
+          <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div
+                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                <div
+                  class="overflow-hidden rounded-lg shadow ring-1 ring-black/5">
+                  <table
+                    class="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+                    <thead class="bg-gray-50 dark:bg-background-dark">
+                      <tr>
+                        <th
+                          class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                          scope="col">
+                          Room
+                        </th>
+                        <th
+                          class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                          scope="col">
+                          Monday
+                        </th>
+                        <th
+                          class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                          scope="col">
+                          Tuesday
+                        </th>
+                        <th
+                          class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                          scope="col">
+                          Wednesday
+                        </th>
+                        <th
+                          class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                          scope="col">
+                          Thursday
+                        </th>
+                        <th
+                          class="w-1/6 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                          scope="col">
+                          Friday
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-background-dark/50">
+                      <tr>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                          Computer Lab A101
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >8:00 AM - 10:00 AM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >10:00 AM - 12:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >2:00 PM - 4:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >8:00 AM - 10:00 AM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >1:00 PM - 3:00 PM: Booked</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                          Computer Lab B202
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >9:00 AM - 11:00 AM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >1:00 PM - 3:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >10:00 AM - 12:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >11:00 AM - 1:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >2:00 PM - 4:00 PM: Available</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                          Computer Lab C303
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >10:00 AM - 12:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >2:00 PM - 4:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >11:00 AM - 1:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >12:00 PM - 2:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >3:00 PM - 5:00 PM: Booked</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                          Computer Lab D404
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >11:00 AM - 1:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >3:00 PM - 5:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >12:00 PM - 2:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >1:00 PM - 3:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >4:00 PM - 6:00 PM: Available</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900 dark:text-white">
+                          Computer Lab E505
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >12:00 PM - 2:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >4:00 PM - 6:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >1:00 PM - 3:00 PM: Booked</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-300"
+                            >2:00 PM - 4:00 PM: Available</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-300">
+                          <span
+                            class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-300"
+                            >5:00 PM - 7:00 PM: Booked</span
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div
+      id="upload-modal"
+      class="fixed inset-0 bg-gray-900/80 hidden justify-center z-[100]">
+      <div
+        class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-2xl max-w-sm w-full space-y-4 transform transition-all self-center">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+          Ubah Foto Profil
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Pilih gambar dari komputer Anda untuk mengganti foto profil.
+        </p>
+
+        <form id="photo-upload-form">
+          <input type="file" id="photo-input" accept="image/*" class="hidden" />
+
+          <button
+            type="button"
+            id="select-photo-btn"
+            class="w-full py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            Pilih File Gambar (.jpg, .png)
+          </button>
+
+          <div class="mt-4 flex justify-end space-x-3">
+            <button
+              type="button"
+              id="cancel-upload-btn"
+              class="py-2 px-4 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="save-photo-btn"
+              class="py-2 px-4 rounded-lg text-sm font-medium text-white bg-primary hover:bg-primary/90 transition-colors disabled:bg-gray-400"
+              disabled>
+              Simpan Foto
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
