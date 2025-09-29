@@ -1,9 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Fungsi pembantu untuk navigasi
+  // Fungsi pembantu untuk navigasi normal (tetap menyimpan histori)
   const navigateTo = (url) => {
     window.location.href = url;
   };
-
+  
+  // Fungsi untuk pengalihan (redirect) yang membersihkan histori browser
+  const navigateAndClearHistory = (url) => {
+    window.location.replace(url); 
+  };
+  
   const currentPage = window.location.pathname.split("/").pop();
 
   // 1. INISIALISASI DATA PENGGUNA (USERS)
@@ -18,47 +23,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
 
   // =========================================================
-  // 0. CEK AUTENTIKASI DAN LOGIKA DROPDOWN PROFIL
+  // 0A. PERLINDUNGAN HALAMAN PUBLIK (Login/Register)
+  // Tidak boleh diakses jika sudah login.
   // =========================================================
-  const publicPages = ["index.html", "Register.html", ""]; // Halaman yang tidak memerlukan login
+  const publicPages = ["index.html", "Register.html", ""]; 
 
   if (publicPages.includes(currentPage) && currentUser) {
-    // Jika pengguna sudah login (currentUser ada) dan mencoba mengakses Login/Register,
-    // arahkan mereka langsung ke dashboard utama (home.html).
-
-    // Cek role untuk menentukan dashboard yang tepat
-    if (currentUser.role === "admin") {
-      navigateTo("Admin.html");
-    } else {
-      navigateTo("home.html");
-    }
-    return; // Hentikan script dari mengeksekusi logika Login/Register
+      if (currentUser.role === 'admin') {
+          navigateAndClearHistory("Admin.html");
+      } else {
+          navigateAndClearHistory("home.html");
+      }
+      return; 
   }
 
-  const protectedPages = [
-    "home.html",
-    "Admin.html",
-    "RoomList.html",
-    "Reservasi.html",
-    "Jadwal.html",
-    "CalenderView.html",
-    "PopUp.html",
-  ];
+  // =========================================================
+  // 0B. PERLINDUNGAN HALAMAN TERPROTEKSI (Membutuhkan Login)
+  // =========================================================
+  const protectedPages = ["home.html", "Admin.html", "RoomList.html", "Reservasi.html", "Jadwal.html", "CalenderView.html", "PopUp.html"];
 
   if (protectedPages.includes(currentPage)) {
-    if (!currentUser) {
-      alert("🔒 Akses ditolak. Anda harus login terlebih dahulu.");
-      navigateTo("index.html");
-      return;
-    }
-
-    if (currentPage === "Admin.html" && currentUser.role !== "admin") {
-      alert("❌ Akses Admin ditolak. Anda dialihkan ke halaman utama.");
-      navigateTo("home.html");
-      return;
-    }
-
-    initProfileFeatures(currentUser, navigateTo);
+      if (!currentUser) {
+          alert("🔒 Akses ditolak. Anda harus login terlebih dahulu.");
+          // PENTING: Gunakan fungsi yang menghapus histori
+          navigateAndClearHistory("index.html"); 
+          return; 
+      }
+      
+      // Cek Role Admin
+      if (currentPage === "Admin.html" && currentUser.role !== "admin") {
+          alert("❌ Akses Admin ditolak. Anda dialihkan ke halaman utama.");
+          navigateAndClearHistory("home.html");
+          return;
+      }
+      
+      initProfileFeatures(currentUser, navigateTo);
   }
 
   // =========================================================
@@ -483,3 +482,4 @@ function initProfileFeatures(currentUser, navigateTo) {
     }
   }
 }
+
